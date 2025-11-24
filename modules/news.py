@@ -2,13 +2,9 @@ import requests
 
 def get_news():
     try:
-        url = "https://api.currentsapi.services/v1/latest-news?language=en"
-        r = requests.get(url, timeout=5)
-        data = r.json()
-
-        articles = data.get("news", [])[:3]
-        headlines = [a["title"] for a in articles]
-
-        return "Top news: " + " | ".join(headlines)
+        url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=23d7db44b1d444eea8f948b29f1ea35d"
+        r = requests.get(url).json()
+        headline = r["articles"][0]["title"]
+        return f"Top news: {headline}"
     except:
-        return "News unavailable right now."
+        return "News currently unavailable."
